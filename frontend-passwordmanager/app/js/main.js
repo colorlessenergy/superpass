@@ -30,8 +30,6 @@ function submitRegisterForm(event) {
   var data = {};
   var errorMessage;
 
-  alert(form.hash.value);
-  alert(form.username.value);
   if (form.username.value) {
     data.username = form.username.value;
   } else {
@@ -54,8 +52,12 @@ function submitRegisterForm(event) {
     body: JSON.stringify(data)
   })
   .then(function (res) {
-    submitSuccess(res);
-    window.location = '/login';
+    if (!res.ok) {
+      return submitError(res);
+    } else {
+      submitSuccess(res);
+      return window.location = '/login';
+    }
   })
   .catch(submitError);
 }
@@ -79,9 +81,6 @@ function submitLoginForm(event) {
     hash: loginForm.hash.value
   }
 
-  console.log(data, 'LOGIN');
-
-
   if (errorMessage) {
     return displayError(errorMessage);
   }
@@ -94,7 +93,6 @@ function submitLoginForm(event) {
     body: JSON.stringify(data)
   })
   .then(function (res) {
-    console.log(res, 'first chain');
     if (!res.ok)  {
       return submitError(res);
     } else {
@@ -176,7 +174,6 @@ function submitdeleteApplicationForm (event) {
     if (!res.ok) {
       return submitError(res);
     }
-    console.log(res);
     window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
@@ -210,11 +207,9 @@ function submitUpdateApplicationForm (event) {
     method: 'PUT',
     body: JSON.stringify(data)
   }).then(function (res) {
-    console.log('hello');
     if (!res.ok) {
       return submitError(res);
     }
-    // console.log(res);
     window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
@@ -254,7 +249,6 @@ function submitNewPasswordForm (event) {
     hash: createNewPasswordForm.hash.value
   }
 
-  // console.log(localStorage.token)
 
   fetch('/users/createpassword/' + appName, {
     headers: {
@@ -265,11 +259,9 @@ function submitNewPasswordForm (event) {
     body: JSON.stringify(data)
   })
   .then(function (res) {
-    console.log('hello first part of chain')
     if (!res.ok) {
       return submitError(res);
     }
-    console.log('reached')
     window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
@@ -312,7 +304,6 @@ function submitDeletePasswordForm (event) {
     if (!res.ok) {
       return submitError(res);
     }
-    console.log(res);
     window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
@@ -355,7 +346,6 @@ function submitUpdatePasswordForm (event) {
     if (!res.ok) {
       return submitError(res);
     }
-    console.log(res);
     window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
@@ -364,8 +354,6 @@ function submitUpdatePasswordForm (event) {
 
 function submitSuccess (res) {
   if (!res.ok) return submitError(res);
-  alert('ranned')
-  console.log(res);
   // reset form
   form.reset();
 }
