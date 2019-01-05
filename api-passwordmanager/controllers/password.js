@@ -27,12 +27,12 @@ exports.getPasswords = function (req, res, next) {
 
       // decrypt password and username before giving to user
       found.arrOfPasswords.forEach(function (obj, i) {
-        console.log(obj.password, obj.username, 'DECRYPTING PASSWORDSS');
+        console.log(obj.password, obj.username, 'DECRYPTING PASSWORDS');
         found.arrOfPasswords[i].password = decrypt(obj.password);
         found.arrOfPasswords[i].username = decrypt(obj.username);
       });
 
-      console.log(found, 'FOUDN THE ACCOUNT');
+      console.log(found, 'FOUND THE ACCOUNT');
       return res.send(found);
     }
 

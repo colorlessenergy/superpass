@@ -5,7 +5,8 @@
   "main": "frontend-passwordmanager.js",
   "scripts": {
     "build": "npm install && grunt publish",
-    "dev": "nodemon frontend-passwordmanager.js && grunt"
+    "dev": "nodemon frontend-passwordmanager.js && grunt",
+    "start": "node frontend-passwordmanager.js && grunt publish"
   },
   "author": "",
   "license": "ISC",

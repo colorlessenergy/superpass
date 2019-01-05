@@ -1,4 +1,21 @@
 extends template
 
 block content
-  h1 landing page
+  div.contain
+    header
+      nav.nav
+        p.nav__title password manager
+        ul.nav__links
+          li.nav__link
+            a.nav__cta(href="/login") login
+          li.nav__link
+            a.nav__cta.nav__cta--pop(href="/register") sign up
+      div.cta
+        h2.cta__title Store your passwords!
+        p.cta__button
+          a.cta__link(href="/register") sign up
+    section.about
+      h3.about__header remembering passwords is hard !
+      p.about__description just remember one password and you will have access to all. You will have access to all your passwords from anywhere.
+    footer
+      p &copy; brian munoz 2019

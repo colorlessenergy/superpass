@@ -42,5 +42,5 @@ if (app.locals.dev) {
 app.use((err, req, res, next) => res.status(err.status || 500).send());
 
 app.listen(config.port, function() {
-  console.log('listening on port 3000')
+  console.log('listening on port ' + config.port)
 });
