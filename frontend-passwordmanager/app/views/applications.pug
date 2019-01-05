@@ -1,0 +1,17 @@
+extends template
+
+block content
+  a(href='/users/createapplication') create an application to store passwords
+  h1 here are all your applications
+  div#error-message
+
+  #apps
+    each val, index in app
+      p
+        a(href='/users/passwords/' + val.name + '/' + index + '?token=' + token) #{val.name}
+      p
+        a(href='/users/deleteapplication?token=' + token) delete app
+      p
+        a(href='/users/updateapplication/' + val.name +  '?token=' + token) update application details
+    else
+      a(href='/users/createapplication') create an application to store passwords

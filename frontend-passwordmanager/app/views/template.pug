@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title || "password manager"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+    a(href='/login') login
+    a(href='/register') register
+    script(src='/js/main.min.js')
+    if token
+        script localStorage.token = "#{token}"
+    block postScript
+    if dev
+        script(src='//localhost:10000/livereload.js')

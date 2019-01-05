@@ -1,0 +1,11 @@
+extends template
+
+block content
+  h2 create new application
+  p create a new application to store passwords in
+
+  div#error-message
+
+  form#create-application
+    input(type='text' name='newApplication' placeholder="application name")
+    button(type='submit') submit

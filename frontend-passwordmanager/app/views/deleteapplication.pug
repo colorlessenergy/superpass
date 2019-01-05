@@ -1,0 +1,9 @@
+extends template
+
+block content
+  p insert the name of the application to delete it. warning there will be no way to recover it or any of the passwords in it.
+  div#error-message
+
+  form#delete-application
+    input(type='text' name='applicationName' placeholder='application name...')
+    button(type="submit") submit

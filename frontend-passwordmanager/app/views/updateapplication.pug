@@ -1,0 +1,9 @@
+extends template
+
+block content
+  p insert the new application name.
+  div#error-message
+
+  form#update-application(data-id=id)
+    input(type='text' name='changeName' placeholder='application name...')
+    button(type="submit") submit
