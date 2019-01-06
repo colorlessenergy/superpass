@@ -1,11 +1,11 @@
 extends template
 
 block content
-  h2 create new application
-  p create a new application to store passwords in
+  div.logo
+    img.logo__svg(src='/imgs/logo-lock.svg' alt='lock logo')
+    p.danger#error-message
 
-  div#error-message
-
-  form#create-application
-    input(type='text' name='newApplication' placeholder="application name")
-    button(type='submit') submit
+  form.form#create-application
+    label.form__label(for='username') application name
+    input.form__input(type='text' name='newApplication' placeholder="application name")
+    button.button(type='submit') create new application

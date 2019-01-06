@@ -10,7 +10,6 @@ const key = crypto
 
 exports.getPasswords = function (req, res, next) {
   User.findById(req.user.id, function (err, user) {
-    console.log('requesting for the accounts');
     if (err) return next(err);
     if (!user) return res.status(404).send('no user with that ID');
     let application = req.params.app;
@@ -27,12 +26,10 @@ exports.getPasswords = function (req, res, next) {
 
       // decrypt password and username before giving to user
       found.arrOfPasswords.forEach(function (obj, i) {
-        console.log(obj.password, obj.username, 'DECRYPTING PASSWORDS');
         found.arrOfPasswords[i].password = decrypt(obj.password);
         found.arrOfPasswords[i].username = decrypt(obj.username);
       });
 
-      console.log(found, 'FOUND THE ACCOUNT');
       return res.send(found);
     }
 
@@ -42,7 +39,6 @@ exports.getPasswords = function (req, res, next) {
 
 exports.createPassword = function (req, res, next) {
   // need username, hash from user
-  console.log('started to create password');
   User.findById(req.user.id, function (err, user) {
     if (err) return next (err);
     if (!user) return res.status(404).send('no user with that ID');
@@ -74,7 +70,6 @@ exports.createPassword = function (req, res, next) {
     // save the doc
     user.save(function (err, user) {
       if (err) return next(err);
-      console.log('finish creating password');
       return res.status(200).send('sucessfully added a new account');
     });
   });
@@ -89,7 +84,6 @@ exports.updatePassword = function (req, res, next) {
     // find the object in the array trying to update
     // username or password
     // need username and password
-    console.log('STARTING TO UPDATE PASSWORD');
     user.passwordsStorage.some(function (app, i) {
       if (app.name === req.params.app) {
         if (req.body.username) {
@@ -110,7 +104,6 @@ exports.updatePassword = function (req, res, next) {
     // save the doc
     user.save(function (err, user) {
       if (err) return next(err);
-      console.log('sucessfully updated account');
       return res.status(200).send('sucessfully updated an account');
     });
   });
@@ -118,7 +111,6 @@ exports.updatePassword = function (req, res, next) {
 
 exports.deletePassword = function (req, res, next) {
   // will get the account username and password from req.body
-  console.log(req.params.index, req.params.app, 'RANNED DELETING PASSWORD');
   User.findById(req.user.id, function (err, user) {
     if (err) return next(err);
     if (!user) return res.status(404).send('no user with that ID');
@@ -130,7 +122,6 @@ exports.deletePassword = function (req, res, next) {
         var account = acc.arrOfPasswords[req.params.index];
         account.username = decrypt(account.username);
         account.password = decrypt(account.password);
-        console.log(account)
 
         if (account.username === req.body.username) {
           // splice the account inside the array of passwords
@@ -150,7 +141,6 @@ exports.deletePassword = function (req, res, next) {
     // save the doc
     user.save(function (err, user) {
       if (err) return next(err);
-      console.log('sucessfully deleted password');
       return res.status(200).send('sucessfully deleted an account');
     });
   });

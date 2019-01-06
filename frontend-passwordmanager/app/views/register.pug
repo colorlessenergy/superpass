@@ -1,11 +1,12 @@
 extends template
 
 block content
-  h1 register here
-  p unless you want to lose your password :)
-  div#error-message
-  form#register-form
-    h1 sign up for password manager on the CLOUD
-    input#username(type="text" name="username" placeholder="username")
-    input#hash(type="password" name="hash" placeholder="hash")
-    button(type="submit") submit
+  div.logo
+    img.logo__svg(src='imgs/logo-lock.svg' alt='lock logo')
+    div.danger#error-message
+  form.form#register-form
+    label.form__label(for='username') username
+    input.form__input#username-login(type='text' name='username' placeholder='username')
+    label.form__label(for='hash') password
+    input.form__input#hash-login(type='password' name='hash' placeholder='password')
+    button.button(type='submit') sign up

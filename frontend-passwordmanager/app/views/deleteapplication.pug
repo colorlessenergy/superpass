@@ -1,9 +1,12 @@
 extends template
 
 block content
-  p insert the name of the application to delete it. warning there will be no way to recover it or any of the passwords in it.
+  div.logo
+    img.logo__svg(src='/imgs/logo-lock.svg' alt='lock logo')
+    p.danger insert application name to delete it
   div#error-message
 
-  form#delete-application
-    input(type='text' name='applicationName' placeholder='application name...')
-    button(type="submit") submit
+  form.form#delete-application
+    label.form__label(for='applicationName') application name
+    input.form__input(type='text' name='applicationName' placeholder='application name...')
+    button.button(type="submit") delete application

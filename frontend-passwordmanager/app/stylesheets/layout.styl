@@ -22,3 +22,52 @@ $margin = 0 15%
 
   &__description
     max-width: 500px
+
+
+.cards
+  display: flex
+  justify-content: space-around
+  flex-wrap: wrap
+
+.card
+  border: 1px solid #000
+  width: 26%
+  margin: 10px 0
+  text-align: center
+  border-radius: 10px
+
+  &__name
+    padding: 30px
+    display: inline-block
+    width: 100%
+    color: #000
+    text-decoration: none
+
+  &__config
+    display: flex
+    justify-content: space-between
+
+  &__update, &__delete
+    margin: 10px 20px
+
+
+.login-nav
+  display: flex
+  justify-content: space-around
+  list-style-type: none
+
+.login-nav__li
+  margin: 0 50px
+
+.login-nav__link
+  color: #000
+  text-decoration: none
+  font-weight: 500
+  text-transform: uppercase
+
+.card--left
+  text-align: left
+
+.center
+  text-align: center
+  margin: 50px 0;

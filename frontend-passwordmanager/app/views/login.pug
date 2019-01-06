@@ -1,9 +1,13 @@
 extends template
 
 block content
-  div#error-message
-  form#login-form
-    h1 LOGIN
-    input#username-login(type="text" name="username" placeholder="username")
-    input#hash-login(type="password" name="hash" placeholder="hash")
-    button(type="submit") submit
+  div.logo
+    img.logo__svg(src='imgs/logo-lock.svg' alt='lock logo')
+    div.danger#error-message
+
+  form.form#login-form
+    label.form__label(for='username') username
+    input.form__input#username-login(type='text' name='username' placeholder='username')
+    label.form__label(for='hash') password
+    input.form__input#hash-login(type='password' name='hash' placeholder='password')
+    button.button(type='submit') log in

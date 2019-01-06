@@ -1,17 +1,26 @@
 extends template
 
 block content
-  a(href='/users/createapplication') create an application to store passwords
-  h1 here are all your applications
-  div#error-message
-
+  nav
+    ul.login-nav
+      li.login-nav__li
+        a.login-nav__link(href='/users/applications?token=' + token) Applications
+      li.login-nav__li
+        a.login-nav__link(href='/logout/' + token) LOG OUT
+  div.danger#error-message
   #apps
-    each val, index in app
-      p
-        a(href='/users/passwords/' + val.name + '/' + index + '?token=' + token) #{val.name}
-      p
-        a(href='/users/deleteapplication?token=' + token) delete app
-      p
-        a(href='/users/updateapplication/' + val.name +  '?token=' + token) update application details
-    else
-      a(href='/users/createapplication') create an application to store passwords
+    h3.title here are all your applications that store passwords
+    p.center
+      a.button(href='/users/createapplication') create new application
+    div.cards
+      each val, index in app
+        div.card
+          a.card__name(href='/users/passwords/' + val.name + '/' + index + '?token=' + token)
+            h4 #{val.name}
+          div.card__config
+            p.card__delete
+              a(href='/users/deleteapplication?token=' + token)
+                img(src='/imgs/delete.svg')
+            p.card__update
+              a(href='/users/updateapplication/' + val.name +  '?token=' + token)
+                img(src='/imgs/wrench.svg')

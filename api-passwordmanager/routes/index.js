@@ -41,4 +41,7 @@ router.route('/users/password/:app/:index')
 router.route('/auth/token')
   .post(auth.loginUser);
 
+router.route('/logout')
+  .put(auth.logout)
+
 module.exports = router;

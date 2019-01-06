@@ -97,21 +97,18 @@ router.get('/users/passwords/:app/:index', auth.userRequired, function (req, res
 
 
 router.get('/users/createpassword/:app', function (req, res, next) {
-  // console.log('creating a new password');
   return res.render('createpassword', {
     appname: req.params.app
   });
 });
 
 router.post('/users/createpassword/:app', auth.userRequired, function (req, res, next) {
-  console.log('creating a new password');
   return request.post(config.apiUrl + '/users/password/' + req.params.app +'?token=' + req.token, {
     form: req.body
   }).pipe(res);
 });
 
 router.get('/users/deletepassword/:app/:index', auth.userRequired, function (req, res, next) {
-  // console.log(req.params.index)
   return res.render('deletepassword', {
     index: req.params.index,
     appName: req.params.app
@@ -119,14 +116,12 @@ router.get('/users/deletepassword/:app/:index', auth.userRequired, function (req
 });
 
 router.delete('/users/deletepassword/:app/:index', auth.userRequired, function (req, res, next) {
-  console.log('deleting password')
   return request.delete(config.apiUrl + '/users/password/' + req.params.app +'/' + req.params.index + '?token=' + req.token, {
       form: req.body
     }).pipe(res);
 });
 
 router.get('/users/updatepassword/:app/:index', auth.userRequired, function (req, res, next) {
-  // console.log(req.params.index)
   return res.render('updatepassword', {
     index: req.params.index,
     appName: req.params.app
@@ -134,12 +129,18 @@ router.get('/users/updatepassword/:app/:index', auth.userRequired, function (req
 });
 
 router.put('/users/updatepassword/:app/:index', auth.userRequired, function (req, res, next) {
-  console.log('updating password')
   return request.put(config.apiUrl + '/users/password/' + req.params.app +'/' + req.params.index + '?token=' + req.token, {
       form: req.body
     }).pipe(res);
 });
 
+
+// LOG OUT
+
+router.get('/logout/:token', function(req, res, next) {
+  res.redirect('/');
+  return request.put(config.apiUrl + '/logout/?token=' + req.params.token);
+});
 
 
 

@@ -48,6 +48,35 @@ exports.validateUser = function (req, res, next) {
   validateToken(req, res, next);
 }
 
+exports.logout = function (req, res, next) {
+  let token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  if (!token) return res.status(403).send('this endpoint requires a token');
+
+
+  try {
+    var decoded = jwt.verify(token, config.secret);
+  } catch (err) {
+    return res.status(403).send('Failed to authenticate token');
+  }
+
+  User.findById(decoded.id, function (err, user) {
+    if (err) return next(err);
+
+    if (!user) return res.status(403).send('Invalid user');
+
+    if (token !== user.token) return res.status(403).send('Expired token');
+
+    user.token = '';
+
+    user.save(function (err, user) {
+      if (err) return next(err);
+      console.log(user);
+      return res.status(200).send('logged out successfully');
+    })
+  });
+}
+
 function validateToken (req, res, next) {
   let token = req.body.token || req.query.token || req.headers['x-access-token'];
 

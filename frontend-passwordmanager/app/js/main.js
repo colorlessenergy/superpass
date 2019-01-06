@@ -28,7 +28,7 @@ function submitRegisterForm(event) {
   event.preventDefault();
 
   var data = {};
-  var errorMessage;
+  var errorMessage = '';
 
   if (form.username.value) {
     data.username = form.username.value;
@@ -66,7 +66,7 @@ function submitLoginForm(event) {
   event.preventDefault();
 
   var data = {};
-  var errorMessage;
+  var errorMessage = '';
 
   if (!loginForm.username.value) {
     errorMessage = 'you are missing a username';
@@ -121,7 +121,7 @@ function submitNewApplicationForm (event) {
   }
 
   if (errorMessage) {
-    displayError(errorMessage)
+    return displayError(errorMessage)
   }
 
   var data = {
@@ -139,10 +139,9 @@ function submitNewApplicationForm (event) {
   .then(function (res) {
     if (!res.ok) {
       return submitError(res);
+    } else {
+      return window.location = '/users/applications?token=' + localStorage.token;
     }
-    return res.json().then(function (result) {
-      window.location = '/users/applications?token=' + localStorage.token;
-    })
   })
   .catch(submitError);
 }
@@ -173,8 +172,9 @@ function submitdeleteApplicationForm (event) {
   }).then(function (res) {
     if (!res.ok) {
       return submitError(res);
+    } else {
+      window.location = '/users/applications?token=' + localStorage.token;
     }
-    window.location = '/users/applications?token=' + localStorage.token;
     return;
   })
   .catch(submitError);
@@ -262,7 +262,7 @@ function submitNewPasswordForm (event) {
     if (!res.ok) {
       return submitError(res);
     }
-    window.location = '/users/applications?token=' + localStorage.token;
+    window.location = '/users/applications/?token=' + localStorage.token;
     return;
   })
   .catch(submitError);
